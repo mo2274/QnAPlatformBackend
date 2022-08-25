@@ -1,7 +1,12 @@
+using Microsoft.EntityFrameworkCore;
+using QnAPlatformBackend.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-
+builder.Services.AddDbContext<QnADbContext>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("QnAConnection"));
+});
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
