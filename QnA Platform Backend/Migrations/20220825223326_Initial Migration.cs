@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace QnA_Platform_Backend.Migrations
+namespace QnAPlatformBackend.Migrations
 {
     public partial class InitialMigration : Migration
     {

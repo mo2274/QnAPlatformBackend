@@ -7,7 +7,7 @@ using QnAPlatformBackend.Data;
 
 #nullable disable
 
-namespace QnA_Platform_Backend.Migrations
+namespace QnAPlatformBackend.Migrations
 {
     [DbContext(typeof(QnADbContext))]
     partial class QnADbContextModelSnapshot : ModelSnapshot

@@ -8,7 +8,7 @@ using QnAPlatformBackend.Data;
 
 #nullable disable
 
-namespace QnA_Platform_Backend.Migrations
+namespace QnAPlatformBackend.Migrations
 {
     [DbContext(typeof(QnADbContext))]
     [Migration("20220825223326_Initial Migration")]

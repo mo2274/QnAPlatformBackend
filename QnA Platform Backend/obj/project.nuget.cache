@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rJgkqd62s+nkWcoNyflbTO5DqVJLxVSkTDz13ckI9rkjExu4O3WbaDXCtq5zmuu/kbX+qdbs9UURMGGlvrJ/BA==",
+  "dgSpecHash": "myFGdRCzmKBVvoYIascsz1iGG+JOVFetoOXcY6eq7WmaDyh86Zg8bQHzAmmxOJyDDHB8renZryXA/vavP/EEFQ==",
   "success": true,
-  "projectFilePath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnA Platform Backend.csproj",
+  "projectFilePath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnAPlatformBackend.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mohamed\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

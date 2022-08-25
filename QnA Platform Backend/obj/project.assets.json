@@ -2154,9 +2154,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnA Platform Backend.csproj",
-      "projectName": "QnA Platform Backend",
-      "projectPath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnA Platform Backend.csproj",
+      "projectUniqueName": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnAPlatformBackend.csproj",
+      "projectName": "QnAPlatformBackend",
+      "projectPath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnAPlatformBackend.csproj",
       "packagesPath": "C:\\Users\\Mohamed\\.nuget\\packages\\",
       "outputPath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\obj\\",
       "projectStyle": "PackageReference",
