@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QnAPlatformBackend.Data;
 
@@ -10,9 +11,10 @@ using QnAPlatformBackend.Data;
 namespace QnAPlatformBackend.Migrations
 {
     [DbContext(typeof(QnADbContext))]
-    partial class QnADbContextModelSnapshot : ModelSnapshot
+    [Migration("20220826094302_add user id to questions and answers")]
+    partial class adduseridtoquestionsandanswers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

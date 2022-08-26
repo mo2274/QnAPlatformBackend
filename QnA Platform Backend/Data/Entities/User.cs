@@ -9,5 +9,8 @@ namespace QnAPlatformBackend.Data.Entities
         public string UserName { get; set; }
         [Required]
         public string Password { get; set; }
+        public List<Answer> Answers { get; set; }
+        public List<Question> Questions { get; set; }
+        public List<Vote> Votes { get; set; }
     }
 }

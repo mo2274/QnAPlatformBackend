@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QnAPlatformBackend.Data.Entities;
 using QnAPlatformBackend.Data.Repositories;
 using QnAPlatformBackend.Models;
@@ -7,6 +8,7 @@ namespace QnAPlatformBackend.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionRepository questionRepository;
@@ -57,6 +59,8 @@ namespace QnAPlatformBackend.Controllers
         {
             try
             {
+                //TODO Get the user data
+
                 var question = new Question() { Text = model.Text };
                 question = await questionRepository.AddQuestionAsync(question);
 
@@ -78,6 +82,8 @@ namespace QnAPlatformBackend.Controllers
 
                 if (question == null)
                     return BadRequest();
+
+                //TODO GET THE USER DATA
 
                 var answer = new Answer()
                 {
@@ -110,6 +116,8 @@ namespace QnAPlatformBackend.Controllers
                 if (answer == null)
                     return BadRequest();
 
+                // GET THE USER DATA
+
                 await answerRepository.DeleteAnswerAsync(answer);
 
                 return Ok();
@@ -135,7 +143,9 @@ namespace QnAPlatformBackend.Controllers
                 if (answer == null)
                     return BadRequest();
 
+                //TODO GET THE USER DATA
                 //TODO ADD VOTE INTERFACE WITH A METHOD UPDATE VOTE
+
 
                 return Ok();
             }
