@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "myFGdRCzmKBVvoYIascsz1iGG+JOVFetoOXcY6eq7WmaDyh86Zg8bQHzAmmxOJyDDHB8renZryXA/vavP/EEFQ==",
+  "dgSpecHash": "wFoL30jqfJis1xNlNcIRw/Wpm1yQuUHkpivI0C49tkmJG3UYMhLSiR0okPOs8BJ/jd/ghXkVBJ88ZpX66g/y3Q==",
   "success": true,
   "projectFilePath": "D:\\projects\\QnA Platform Backend\\QnA Platform Backend\\QnAPlatformBackend.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Mohamed\\.nuget\\packages\\automapper\\11.0.1\\automapper.11.0.1.nupkg.sha512",
     "C:\\Users\\Mohamed\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
-    "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",
     "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\Mohamed\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.8\\microsoft.entityframeworkcore.6.0.8.nupkg.sha512",
