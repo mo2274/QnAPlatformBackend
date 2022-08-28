@@ -2,26 +2,35 @@
 using Microsoft.AspNetCore.Mvc;
 using QnAPlatformBackend.Data.Entities;
 using QnAPlatformBackend.Data.Repositories;
-using QnAPlatformBackend.Models;
+using QnAPlatformBackend.ViewModels;
+using System.Security.Claims;
 
 namespace QnAPlatformBackend.Controllers
 {
-    [Route("[controller]")]
+    [Route("/questions")]
     [ApiController]
     [Authorize]
     public class QuestionsController : ControllerBase
     {
         private readonly IQuestionRepository questionRepository;
         private readonly IAnswerRepository answerRepository;
+        private readonly IUserRepository userRepository;
+        private readonly IVoteRepository voteRepository;
 
-        public QuestionsController(IQuestionRepository questionRepository, IAnswerRepository answerRepository)
+        public QuestionsController(
+            IQuestionRepository questionRepository,
+            IAnswerRepository answerRepository,
+            IUserRepository userRepository,
+            IVoteRepository voteRepository)
         {
             this.questionRepository = questionRepository;
             this.answerRepository = answerRepository;
+            this.userRepository = userRepository;
+            this.voteRepository = voteRepository;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<Question>>> Get()
+        public async Task<ActionResult<List<QuestionModel>>> Get()
         {
             try
             {
@@ -33,7 +42,6 @@ namespace QnAPlatformBackend.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Faild to retrieve questions");
             }
-
         }
 
         [HttpGet("{questionId:int}")]
@@ -44,9 +52,9 @@ namespace QnAPlatformBackend.Controllers
                 var question = await questionRepository.GetQuestionByIdAsync(questionId);
 
                 if (question == null)
-                    return NotFound();
+                    return NotFound("Question not found");
 
-                return Ok(question);
+                return Ok(question.Text);
             }
             catch (Exception)
             {
@@ -54,17 +62,44 @@ namespace QnAPlatformBackend.Controllers
             }
         }
 
-        [HttpPost]
-        public async Task<ActionResult<Question>> Post(QuestionModel model)
+        [HttpDelete("{questionId:int}")]
+        public async Task<ActionResult<Question>> Delete(int questionId)
         {
             try
             {
-                //TODO Get the user data
+                var question = await questionRepository.GetQuestionByIdAsync(questionId);
 
-                var question = new Question() { Text = model.Text };
-                question = await questionRepository.AddQuestionAsync(question);
+                if (question == null)
+                    return BadRequest("Question not found");
 
-                return CreatedAtAction(nameof(Get), new { questionId = question.Id }, question);
+                await questionRepository.DeleteQuestionAsync(question);
+
+                return Ok("Question deleted successfully");
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, "Faild to delete question");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(QuestionModel model)
+        {
+            try
+            {
+                var userId = Convert.ToInt32(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault().Value);
+                var user = await userRepository.GetUserByIdAsync(userId);
+
+                var question = new Question()
+                {
+                    Text = model.Text,
+                    User = user
+                };
+
+                var questionId = await questionRepository.AddQuestionAsync(question);
+
+                return CreatedAtAction(nameof(Get), new { questionId = question.Id }, "Question created successfully");
             }
             catch (Exception)
             {
@@ -74,7 +109,7 @@ namespace QnAPlatformBackend.Controllers
         }
 
         [HttpPost("{questionId:int}/answers")]
-        public async Task<ActionResult<Answer>> Post(int questionId, AnswerModel model)
+        public async Task<ActionResult<string>> Post(int questionId, AnswerModel model)
         {
             try
             {
@@ -83,17 +118,20 @@ namespace QnAPlatformBackend.Controllers
                 if (question == null)
                     return BadRequest();
 
-                //TODO GET THE USER DATA
+                var userId = Convert.ToInt32(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault().Value);
+                var user = await userRepository.GetUserByIdAsync(userId);
 
                 var answer = new Answer()
                 {
                     Text = model.Text,
-                    Question = question
+                    Question = question,
+                    User = user
                 };
 
                 answer = await answerRepository.AddAnswer(answer);
 
-                return Ok(answer);
+                return CreatedAtAction(nameof(Get), new { answerId = answer.Id }, "Answer created successfully");
             }
             catch (Exception)
             {
@@ -109,18 +147,16 @@ namespace QnAPlatformBackend.Controllers
                 var question = await questionRepository.GetQuestionByIdAsync(questionId);
 
                 if (question == null)
-                    return BadRequest();
+                    return BadRequest("Question not found");
 
                 var answer = await answerRepository.GetAnswerByIdAsync(answerId);
 
                 if (answer == null)
-                    return BadRequest();
-
-                // GET THE USER DATA
+                    return BadRequest("answer not found");
 
                 await answerRepository.DeleteAnswerAsync(answer);
 
-                return Ok();
+                return Ok("Answer is deleted successfully");
             }
             catch (Exception)
             {
@@ -136,18 +172,20 @@ namespace QnAPlatformBackend.Controllers
                 var question = await questionRepository.GetQuestionByIdAsync(questionId);
 
                 if (question == null)
-                    return BadRequest();
+                    return BadRequest("Question not found");
 
                 var answer = await answerRepository.GetAnswerByIdAsync(answerId);
 
                 if (answer == null)
-                    return BadRequest();
+                    return BadRequest("answer not found");
 
-                //TODO GET THE USER DATA
-                //TODO ADD VOTE INTERFACE WITH A METHOD UPDATE VOTE
+                var userId = Convert.ToInt32(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                   .FirstOrDefault().Value);
+                var user = await userRepository.GetUserByIdAsync(userId);
 
+                await voteRepository.UpdateVoteAsync(question, answer, user, vote.Value);
 
-                return Ok();
+                return Ok("Vote updated successfully");
             }
             catch (Exception)
             {

@@ -1,11 +1,13 @@
 ﻿using QnAPlatformBackend.Data.Entities;
+using QnAPlatformBackend.ViewModels;
 
 namespace QnAPlatformBackend.Data.Repositories
 {
     public interface IQuestionRepository
     {
-        Task<List<Question>> GetQuestionsAsync();
+        Task<List<QuestionModel>> GetQuestionsAsync();
         Task<Question> GetQuestionByIdAsync(int id);
-        Task<Question> AddQuestionAsync(Question question);
+        Task<int> AddQuestionAsync(Question question);
+        Task DeleteQuestionAsync(Question question);
     }
 }

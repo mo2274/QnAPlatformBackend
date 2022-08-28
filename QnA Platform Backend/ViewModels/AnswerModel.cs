@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace QnAPlatformBackend.Models
+namespace QnAPlatformBackend.ViewModels
 {
     public class AnswerModel
     {

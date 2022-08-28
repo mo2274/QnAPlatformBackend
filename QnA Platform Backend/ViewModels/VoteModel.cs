@@ -1,6 +1,6 @@
 ﻿using QnAPlatformBackend.Utilties;
 
-namespace QnAPlatformBackend.Models
+namespace QnAPlatformBackend.ViewModels
 {
     public class VoteModel
     {

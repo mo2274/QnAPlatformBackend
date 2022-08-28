@@ -4,19 +4,29 @@ namespace QnAPlatformBackend.Data.Repositories
 {
     public class AnswerRepository : IAnswerRepository
     {
-        public Task<Answer> AddAnswer(Answer answer)
+        private readonly QnADbContext context;
+
+        public AnswerRepository(QnADbContext context)
         {
-            throw new NotImplementedException();
+            this.context = context;
         }
 
-        public Task DeleteAnswerAsync(Answer answer)
+        public async Task<Answer> AddAnswer(Answer answer)
         {
-            throw new NotImplementedException();
+            context.Answers.Add(answer);
+            await context.SaveChangesAsync();
+            return answer;
         }
 
-        public Task<Answer> GetAnswerByIdAsync(int id)
+        public async Task DeleteAnswerAsync(Answer answer)
         {
-            throw new NotImplementedException();
+            context.Answers.Remove(answer);
+            await context.SaveChangesAsync();
+        }
+
+        public async Task<Answer> GetAnswerByIdAsync(int id)
+        {
+            return await context.Answers.FindAsync(id);
         }
     }
 }

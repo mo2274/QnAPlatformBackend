@@ -4,6 +4,7 @@ namespace QnAPlatformBackend.Data.Repositories
 {
     public interface IUserRepository
     {
-        Task<User> GetByUsernameAndPassword(string username, string password);
+        Task<User> GetByUsernameAndPasswordAsync(string username, string password);
+        Task<User> GetUserByIdAsync(int userId);
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace QnAPlatformBackend.Models
+﻿namespace QnAPlatformBackend.ViewModels
 {
     public class LoginModel
     {

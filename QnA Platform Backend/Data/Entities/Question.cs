@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace QnAPlatformBackend.Data.Entities
 {
@@ -10,6 +11,7 @@ namespace QnAPlatformBackend.Data.Entities
         public int UserId { get; set; }
         public User User { get; set; }
         public List<Answer> Answers { get; set; }
+        [JsonIgnore]
         public List<Vote> Votes { get; set; }
     }
 }

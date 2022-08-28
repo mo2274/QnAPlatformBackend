@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using QnAPlatformBackend.Data.Repositories;
-using QnAPlatformBackend.Models;
+using QnAPlatformBackend.ViewModels;
 using System.Security.Claims;
 
 namespace QnAPlatformBackend.Controllers
@@ -18,17 +18,29 @@ namespace QnAPlatformBackend.Controllers
             this.userRepository = userRepository;
         }
 
+        [HttpGet]
+        public string Login()
+        {
+            return "You Must Login First";
+        }
+
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var user = userRepository.GetByUsernameAndPassword(loginModel.UserName, loginModel.Password);
+            var userId = Convert.ToInt32(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
+                    .FirstOrDefault().Value);
 
-            if (user == null)
+            var newUser = await userRepository.GetByUsernameAndPasswordAsync(loginModel.UserName, loginModel.Password);
+
+            if (newUser == null)
                 return Unauthorized();
+
+            if (User.Identity.IsAuthenticated && userId == newUser.Id)
+                return Ok("User is already Authenticated");
 
             var claims = new List<Claim>()
             {
-                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+                new Claim(ClaimTypes.NameIdentifier, newUser.Id.ToString()),
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -37,7 +49,7 @@ namespace QnAPlatformBackend.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
                 new AuthenticationProperties { IsPersistent = true });
 
-            return Ok();
+            return Ok("Login successfully");
         }
     }
 }
