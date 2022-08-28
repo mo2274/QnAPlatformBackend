@@ -83,7 +83,7 @@ namespace QnAPlatformBackend.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post(QuestionModel model)
+        public async Task<ActionResult> Post(QuestionModel model)
         {
             try
             {
@@ -99,7 +99,7 @@ namespace QnAPlatformBackend.Controllers
 
                 var questionId = await questionRepository.AddQuestionAsync(question);
 
-                return CreatedAtAction(nameof(Get), new { questionId = question.Id }, "Question created successfully");
+                return CreatedAtAction(nameof(Get), new { questionId = questionId }, "Question created successfully");
             }
             catch (Exception)
             {

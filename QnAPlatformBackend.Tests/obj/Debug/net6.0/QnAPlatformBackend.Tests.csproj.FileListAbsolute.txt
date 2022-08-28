@@ -144,3 +144,4 @@ D:\projects\QnA Platform Backend\QnAPlatformBackend.Tests\obj\Debug\net6.0\refin
 D:\projects\QnA Platform Backend\QnAPlatformBackend.Tests\obj\Debug\net6.0\QnAPlatformBackend.Tests.pdb
 D:\projects\QnA Platform Backend\QnAPlatformBackend.Tests\obj\Debug\net6.0\QnAPlatformBackend.Tests.genruntimeconfig.cache
 D:\projects\QnA Platform Backend\QnAPlatformBackend.Tests\obj\Debug\net6.0\ref\QnAPlatformBackend.Tests.dll
+D:\projects\QnA Platform Backend\QnAPlatformBackend.Tests\bin\Debug\net6.0\nunit.framework.dll
