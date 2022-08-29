@@ -27,16 +27,10 @@ namespace QnAPlatformBackend.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel loginModel)
         {
-            var userId = Convert.ToInt32(User.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier)
-                    .FirstOrDefault().Value);
-
             var newUser = await userRepository.GetByUsernameAndPasswordAsync(loginModel.UserName, loginModel.Password);
 
             if (newUser == null)
                 return Unauthorized();
-
-            if (User.Identity.IsAuthenticated && userId == newUser.Id)
-                return Ok("User is already Authenticated");
 
             var claims = new List<Claim>()
             {
