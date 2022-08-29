@@ -8,5 +8,3 @@ a simple backend for a Q&A Forum called "QnA" where a user would be able to publ
 # To test the project using postman:
   1. adjust the postman to sync cookies to the domain "localhost:7024". "very important for authentication".
   2. run the postman collection.
-
-# If you saw this messege, i forgot to push the last commit, so please wait till 9pm :(.
