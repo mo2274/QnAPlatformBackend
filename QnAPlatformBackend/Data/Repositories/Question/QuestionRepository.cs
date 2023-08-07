@@ -17,20 +17,10 @@ namespace QnAPlatformBackend.Data.Repositories
 
         // Existing methods...
 
-        public async Task<Question> UpdateQuestionAsync(int id, string newText)
+        public async Task UpdateQuestionAsync(Question question)
         {
-            var question = await context.Questions.FindAsync(id);
-
-            if (question == null)
-            {
-                return null;
-            }
-
-            question.Text = newText;
-
+            context.Questions.Update(question);
             await context.SaveChangesAsync();
-
-            return question;
         }
     }
 }
