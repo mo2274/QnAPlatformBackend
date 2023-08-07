@@ -1,10 +1,12 @@
 // QnAPlatformBackend/Controllers/QuestionsController.cs
 
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using QnAPlatformBackend.Data.Entities;
 using QnAPlatformBackend.Data.Repositories;
 using QnAPlatformBackend.ViewModels;
 using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace QnAPlatformBackend.Controllers
 {
@@ -36,16 +38,22 @@ namespace QnAPlatformBackend.Controllers
         public async Task<ActionResult<Question>> Update(int questionId, [FromBody] string newText)
         {
             var question = await questionRepository.GetQuestionByIdAsync(questionId);
-
+        
             if (question == null)
             {
                 return NotFound();
             }
-
+        
+            var currentUserId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (currentUserId != question.UserId)
+            {
+                return Unauthorized();
+            }
+        
             question.Text = newText;
-
+        
             await questionRepository.UpdateQuestionAsync(question);
-
+        
             return Ok(question);
         }
     }
